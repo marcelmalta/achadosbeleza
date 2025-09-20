@@ -1,7 +1,11 @@
 import products from "@/app/data/products.json";
 
-// 🚨 Sem tipagem restritiva para evitar erro no Render
-export default function ProductPage({ params }: { params: { id: string } }) {
+// Definindo um tipo para as props da página para garantir a compatibilidade com o Next.js
+type Props = {
+  params: { id: string };
+};
+
+export default function ProductPage({ params }: Props) {
   const { id } = params;
   const product = products.find((p) => p.id === Number(id));
 
