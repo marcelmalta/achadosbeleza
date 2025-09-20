@@ -1,8 +1,9 @@
 import products from "@/app/data/products.json";
 
-// Definindo um tipo para as props da página para garantir a compatibilidade com o Next.js
+// Tipo completo para as props da página, incluindo params e searchParams
 type Props = {
   params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default function ProductPage({ params }: Props) {
