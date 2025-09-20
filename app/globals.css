@@ -13,6 +13,15 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* Esconde barra de rolagem horizontal */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE e Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out forwards;
 }

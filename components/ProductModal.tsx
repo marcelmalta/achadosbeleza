@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { XMarkIcon, StarIcon, BoltIcon, TruckIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon, StarIcon, BoltIcon } from "@heroicons/react/24/solid";
 
 interface Shipping {
   freeShipping: boolean;
@@ -27,12 +27,7 @@ interface Product {
   paymentInfo: string;
   rating: number;
   reviews: number;
-  bestSeller?: boolean;
   shipping: Shipping;
-  variations?: {
-    color?: string[];
-    voltage?: string[];
-  };
   images: string[];
   description: string[];
   seller: Seller;
@@ -57,34 +52,34 @@ export default function ProductModal({
   if (!product) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full relative animate-fadeIn">
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl relative animate-fadeIn max-h-[90vh] overflow-y-auto">
         {/* botão fechar */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 rounded-full p-2"
+          className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-gray-200 hover:bg-gray-300 rounded-full p-2 z-50"
         >
-          <XMarkIcon className="h-6 w-6 text-gray-700" />
+          <XMarkIcon className="h-7 w-7 sm:h-6 sm:w-6 text-gray-700" />
         </button>
 
-        <div className="grid md:grid-cols-2 gap-8 p-8">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 p-4 sm:p-8">
           {/* coluna imagens */}
           <div>
             <img
               src={mainImage}
               alt={product.title}
-              className="w-full h-96 object-contain rounded-xl shadow-md bg-gray-50"
+              className="w-full h-64 sm:h-96 object-contain rounded-xl shadow-md bg-gray-50"
             />
 
             {/* miniaturas */}
-            <div className="flex gap-2 mt-4 overflow-x-auto">
+            <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
               {product.images.map((img, idx) => (
                 <img
                   key={idx}
                   src={img}
                   alt={`thumb-${idx}`}
                   onClick={() => setMainImage(img)}
-                  className={`h-20 w-20 object-cover rounded-lg cursor-pointer border ${
+                  className={`h-16 w-16 sm:h-20 sm:w-20 object-cover rounded-lg cursor-pointer border ${
                     mainImage === img ? "border-yellow-500" : "border-gray-300"
                   }`}
                 />
@@ -94,15 +89,18 @@ export default function ProductModal({
 
           {/* coluna detalhes */}
           <div>
-            {/* título e rating */}
-            <h2 className="text-2xl font-bold text-gray-900">{product.title}</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{product.title}</h2>
+
+            {/* rating */}
             <div className="flex items-center gap-2 mt-2">
               <div className="flex text-yellow-400">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <StarIcon
                     key={i}
                     className={`h-5 w-5 ${
-                      i < Math.round(product.rating) ? "fill-yellow-400" : "fill-gray-300"
+                      i < Math.round(product.rating)
+                        ? "fill-yellow-400"
+                        : "fill-gray-300"
                     }`}
                   />
                 ))}
@@ -113,11 +111,11 @@ export default function ProductModal({
             </div>
 
             {/* preços */}
-            <p className="text-gray-500 line-through mt-4">
+            <p className="text-gray-500 line-through mt-3 sm:mt-4">
               R$ {product.price.toFixed(2)}
             </p>
             <div className="flex items-center gap-2">
-              <p className="text-4xl font-extrabold text-gray-900">
+              <p className="text-3xl sm:text-4xl font-extrabold text-gray-900">
                 R$ {product.discountPrice.toFixed(2)}
               </p>
               <span className="text-green-600 font-semibold">
@@ -126,64 +124,25 @@ export default function ProductModal({
             </div>
             <p className="text-gray-700 text-sm">{product.paymentInfo}</p>
 
-            {/* shipping badges */}
+            {/* shipping */}
             <div className="mt-4 space-y-1">
               {product.shipping.freeShipping && (
                 <div className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded">
-                  FRETE GRÁTIS ACIMA DE R$ 19
+                  FRETE GRÁTIS
                 </div>
               )}
               {product.shipping.full && (
                 <div className="flex items-center text-sm text-gray-700">
                   <BoltIcon className="h-5 w-5 text-green-600 mr-1" />
-                  Envio FULL (rápido e garantido)
+                  Envio FULL
                 </div>
               )}
               <p className="text-sm text-gray-600">{product.shipping.deliveryTime}</p>
             </div>
 
-            {/* variações */}
-            {product.variations && (
-              <div className="mt-6 space-y-4">
-                {product.variations.color && (
-                  <div>
-                    <p className="font-medium text-gray-800 mb-1">Cor:</p>
-                    <div className="flex gap-2">
-                      {product.variations.color.map((c, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 border rounded-lg text-sm cursor-pointer hover:border-yellow-500"
-                        >
-                          {c}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {product.variations.voltage && (
-                  <div>
-                    <p className="font-medium text-gray-800 mb-1">Voltagem:</p>
-                    <div className="flex gap-2">
-                      {product.variations.voltage.map((v, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 border rounded-lg text-sm cursor-pointer hover:border-yellow-500"
-                        >
-                          {v}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* descrição técnica */}
+            {/* descrição */}
             <div className="mt-6">
-              <h4 className="font-semibold text-gray-800 mb-2">
-                O que você precisa saber
-              </h4>
+              <h4 className="font-semibold text-gray-800 mb-2">Descrição</h4>
               <ul className="list-disc pl-5 space-y-1 text-gray-700 text-sm">
                 {product.description.map((item, idx) => (
                   <li key={idx}>{item}</li>
@@ -205,7 +164,7 @@ export default function ProductModal({
               href={product.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary flex items-center justify-center gap-2 mt-6 w-full text-lg py-4"
+              className="btn-primary flex items-center justify-center gap-2 mt-6 w-full text-lg py-4 bg-yellow-400 hover:bg-yellow-500 rounded-lg font-semibold text-gray-900"
             >
               <img src="/ico.png" alt="Mercado Livre" className="h-7" />
               Comprar no Mercado Livre

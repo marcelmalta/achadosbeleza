@@ -27,57 +27,56 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <>
-      {/* Card responsivo estilo Mercado Livre */}
+      {/* Card estilo Mercado Livre / AliExpress */}
       <div
-        className="bg-white rounded-lg shadow-sm p-3 cursor-pointer hover:shadow-md transition flex sm:flex-col gap-3 border border-gray-200"
+        className="bg-white rounded-lg shadow-md p-3 cursor-pointer hover:shadow-xl transition w-40 sm:w-56 flex-shrink-0"
         onClick={() => setOpen(true)}
       >
         {/* Imagem */}
-        <img
-          src={product.images?.[0] || ""}
-          alt={product.title}
-          className="w-24 h-24 sm:w-full sm:h-48 object-contain rounded"
-        />
+        <div className="w-full h-40 sm:h-48 flex items-center justify-center mb-2">
+          <img
+            src={product.images?.[0] || ""}
+            alt={product.title}
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
 
-        {/* Infos */}
-        <div className="flex-1">
-          {/* Título */}
-          <h3 className="font-semibold text-sm mb-1 line-clamp-2 text-gray-900">
-            {product.title}
-          </h3>
+        {/* Título curto */}
+        <h3 className="font-medium text-sm mb-1 line-clamp-2">
+          {product.title}
+        </h3>
 
-          {/* Preços */}
-          <div className="space-y-1">
-            {product.price && (
-              <p className="text-xs text-gray-500 line-through">
-                R$ {product.price.toFixed(2)}
-              </p>
-            )}
-            {product.discountPrice && (
-              <p className="text-lg font-bold text-gray-900">
-                R$ {product.discountPrice.toFixed(2)}
-              </p>
-            )}
+        {/* Preços */}
+        <div className="space-y-1">
+          {product.price && (
+            <p className="text-xs text-gray-500 line-through">
+              R$ {product.price.toFixed(2)}
+            </p>
+          )}
+          {product.discountPrice && (
+            <p className="text-lg font-bold text-gray-900">
+              R$ {product.discountPrice.toFixed(2)}
+            </p>
+          )}
 
-            {/* Desconto */}
-            {product.discountPercent && (
-              <p className="text-green-600 text-sm font-semibold">
-                {product.discountPercent}% OFF
-              </p>
-            )}
+          {/* Desconto */}
+          {product.discountPercent && (
+            <p className="text-green-600 text-sm font-semibold">
+              {product.discountPercent}% OFF
+            </p>
+          )}
 
-            {/* Parcelamento */}
-            {product.paymentInfo && (
-              <p className="text-xs text-gray-600">{product.paymentInfo}</p>
-            )}
+          {/* Parcelamento */}
+          {product.paymentInfo && (
+            <p className="text-xs text-gray-600">{product.paymentInfo}</p>
+          )}
 
-            {/* Frete */}
-            {product.shipping?.freeShipping && (
-              <p className="text-xs font-medium text-[#00a650]">
-                Frete grátis {product.shipping.full && "⚡FULL"}
-              </p>
-            )}
-          </div>
+          {/* Frete */}
+          {product.shipping?.freeShipping && (
+            <p className="text-green-500 text-xs font-medium">
+              Frete grátis {product.shipping.full && "⚡FULL"}
+            </p>
+          )}
         </div>
       </div>
 

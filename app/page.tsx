@@ -2,9 +2,8 @@ import ProductCard from "@/components/ProductCard";
 import products from "@/app/data/products.json";
 
 export default function Home() {
-  // simulando que os 3 primeiros produtos são "ofertas do dia"
-  const ofertas = products.slice(0, 3);
-  const novidades = products;
+  const ofertas = products.slice(0, 5); // simulação de 5 ofertas
+  const novidades = products; // todos os produtos
 
   return (
     <main className="p-4 max-w-6xl mx-auto space-y-12">
@@ -19,16 +18,16 @@ export default function Home() {
       </section>
 
       {/* OFERTAS DO DIA */}
-      <section
-        id="ofertas"
-        className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-200"
-      >
+      <section id="ofertas">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
           🔥 Ofertas do Dia
         </h2>
-        <div className="flex flex-col divide-y sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-6 sm:divide-y-0">
+        <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
           {ofertas.map((p) => (
-            <div key={p.id} className="py-3 sm:py-0">
+            <div
+              key={p.id}
+              className="snap-start shrink-0 w-44 sm:w-52"
+            >
               <ProductCard product={p} />
             </div>
           ))}
@@ -36,13 +35,16 @@ export default function Home() {
       </section>
 
       {/* NOVIDADES */}
-      <section>
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+      <section id="novidades">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
           ✨ Novidades
         </h2>
-        <div className="flex flex-col divide-y sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-6 sm:divide-y-0">
+        <div className="flex space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
           {novidades.map((p) => (
-            <div key={p.id} className="py-3 sm:py-0">
+            <div
+              key={p.id}
+              className="snap-start shrink-0 w-44 sm:w-52"
+            >
               <ProductCard product={p} />
             </div>
           ))}

@@ -1,54 +1,47 @@
+import ProductCard from "@/components/ProductCard";
 import products from "@/app/data/products.json";
 
-// Tipo completo para as props da página, incluindo params e searchParams
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default function ProductPage({ params }: Props) {
-  const { id } = params;
-  const product = products.find((p) => p.id === Number(id));
-
-  if (!product) {
-    return <p className="p-4">Produto não encontrado</p>;
-  }
+export default function Home() {
+  // simulando que os 3 primeiros produtos são "ofertas do dia"
+  const ofertas = products.slice(0, 3);
+  const novidades = products;
 
   return (
-    <main className="bg-white rounded-xl shadow-md p-6 max-w-4xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Imagem principal */}
-        <img
-          src={product.images[0]}
-          alt={product.title}
-          className="w-full h-80 object-cover rounded-lg shadow"
-        />
+    <main className="p-4 max-w-6xl mx-auto space-y-12">
+      {/* HERO */}
+      <section className="text-center">
+        <h1 className="text-4xl font-extrabold text-[#3483FA] mb-3">
+          AchadosBeleza.com.br
+        </h1>
+        <p className="text-lg text-gray-700">
+          Descubra ofertas incríveis em cosméticos, perfumes e cuidados pessoais.
+        </p>
+      </section>
 
-        {/* Informações */}
-        <div>
-          <h1 className="text-3xl font-bold">{product.title}</h1>
-
-          <p className="text-brand font-bold text-2xl mt-3">
-            R$ {product.discountPrice.toFixed(2)}
-          </p>
-          <p className="text-sm text-gray-500 line-through">
-            R$ {product.price.toFixed(2)} ({product.discountPercent}% OFF)
-          </p>
-
-          {product.description && (
-            <p className="mt-4 text-gray-700">{product.description}</p>
-          )}
-
-          <a
-            href={product.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-block w-full bg-yellow-400 text-gray-900 font-semibold px-4 py-3 rounded-lg hover:bg-yellow-500 transition text-center"
-          >
-            Comprar no Mercado Livre
-          </a>
+      {/* OFERTAS DO DIA */}
+      <section
+        id="ofertas"
+        className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#3483FA]"
+      >
+        <h2 className="text-2xl font-bold text-[#3483FA] mb-4">
+          🔥 Ofertas do Dia
+        </h2>
+        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+          {ofertas.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
         </div>
-      </div>
+      </section>
+
+      {/* NOVIDADES */}
+      <section>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">✨ Novidades</h2>
+        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+          {novidades.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
