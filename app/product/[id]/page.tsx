@@ -1,7 +1,7 @@
 import products from "@/app/data/products.json";
 
 // 🚨 Sem tipagem restritiva para evitar erro no Render
-export default function ProductPage({ params }: any) {
+export default function ProductPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const product = products.find((p) => p.id === Number(id));
 
