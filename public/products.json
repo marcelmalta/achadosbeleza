@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Secador De Cabelo Styllle Profissional Motor AC",
+    "shortName": "Secador Styllle Profissional 2000W",
+    "price": 397.69,
+    "discountPrice": 208.52,
+    "discountPercent": 47,
+    "paymentInfo": "12x R$ 21,67",
+    "rating": 4.7,
+    "reviews": 1523,
+    "shipping": {
+      "freeShipping": true,
+      "full": true,
+      "deliveryTime": "Receba grátis até terça-feira"
+    },
+    "images": [
+      "https://via.placeholder.com/600x600.png?text=Secador+Styllle+1",
+      "https://via.placeholder.com/600x600.png?text=Secador+Styllle+2"
+    ],
+    "color": ["Preto"],
+    "voltage": ["127V", "220V"],
+    "description": [
+      "Motor AC profissional de longa duração",
+      "Potência de 2000W para secagem rápida",
+      "3 níveis de temperatura e 2 de velocidade",
+      "Jato de ar frio para fixação do penteado"
+    ],
+    "seller": {
+      "name": "INFOBLESSED",
+      "level": "MercadoLíder Gold",
+      "sales": "10.000+ vendas",
+      "warranty": "Garantia de 1 ano do fabricante"
+    },
+    "link": "https://produto.mercadolivre.com.br/secador-styllle"
+  }
+]
