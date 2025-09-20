@@ -1,12 +1,8 @@
 import products from "@/app/data/products.json";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { id: string } | Promise<{ id: string }>;
-}) {
-  // Se params vier como Promise, aguarda
-  const resolved = params instanceof Promise ? await params : params;
+export default async function ProductPage({ params }: any) {
+  // No Next 15 App Router, params pode vir tipado como Promise
+  const resolved = await params;
   const { id } = resolved;
 
   const product = products.find((p) => p.id === Number(id));
