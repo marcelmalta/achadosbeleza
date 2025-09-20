@@ -1,7 +1,12 @@
 import products from "@/app/data/products.json";
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  // como params.id é string, precisamos converter para número
+interface ProductPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function ProductPage({ params }: ProductPageProps) {
   const product = products.find((p) => p.id === Number(params.id));
 
   if (!product) return <p className="p-4">Produto não encontrado</p>;
