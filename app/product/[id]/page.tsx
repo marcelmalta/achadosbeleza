@@ -3,9 +3,9 @@ import products from "@/app/data/products.json";
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
+  const { id } = params;
   const product = products.find((p) => p.id === Number(id));
 
   if (!product) return <p className="p-4">Produto não encontrado</p>;
