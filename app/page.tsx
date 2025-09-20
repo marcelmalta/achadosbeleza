@@ -1,5 +1,5 @@
 import ProductCard from "@/components/ProductCard";
-import products from "../public/products.json";
+import products from "@/app/data/products.json";
 
 export default function Home() {
   // simulando que os 3 primeiros produtos são "ofertas do dia"
