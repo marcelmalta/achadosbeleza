@@ -3,9 +3,12 @@ import products from "@/app/data/products.json";
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string } | Promise<{ id: string }>;
 }) {
-  const { id } = params;
+  // Se params vier como Promise, aguarda
+  const resolved = params instanceof Promise ? await params : params;
+  const { id } = resolved;
+
   const product = products.find((p) => p.id === Number(id));
 
   if (!product) return <p className="p-4">Produto não encontrado</p>;
