@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_DISABLE_ESLINT=true NEXT_PRIVATE_SKIP_TYPECHECK=true next build",
+    "build": "NEXT_DISABLE_ESLINT=true next build",
     "start": "next start -H 0.0.0.0 -p $PORT",
     "lint": "eslint"
   },
