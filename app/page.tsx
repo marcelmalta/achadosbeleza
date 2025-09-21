@@ -1,7 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
-import products from "@/app/data/products.json";
 
 export default function Home() {
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error("Erro ao carregar produtos", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <p className="p-6">Carregando produtos...</p>;
+  }
+
   const ofertas = products.slice(0, 3);
   const novidades = products;
 

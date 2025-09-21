@@ -13,17 +13,21 @@ interface Product {
   paymentInfo?: string;
   rating?: number;
   reviews?: number;
-  shipping?: {
-    freeShipping?: boolean;
-    full?: boolean;
-    deliveryTime?: string;
-  };
+  freeShipping?: boolean;
+  full?: boolean;
+  deliveryTime?: string;
   images: string[];
   link: string;
 }
 
 export default function ProductCard({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
+
+  // Garante que sempre teremos uma imagem válida
+  const imageUrl =
+    Array.isArray(product.images) && product.images.length > 0
+      ? product.images[0]
+      : "/placeholder.png"; // 👈 fallback se não tiver imagem
 
   return (
     <>
@@ -35,7 +39,7 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Imagem */}
         <div className="w-full h-40 sm:h-48 flex items-center justify-center mb-2">
           <img
-            src={product.images?.[0] || ""}
+            src={imageUrl}
             alt={product.title}
             className="max-h-full max-w-full object-contain"
           />
@@ -72,9 +76,9 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
 
           {/* Frete */}
-          {product.shipping?.freeShipping && (
+          {product.freeShipping && (
             <p className="text-green-500 text-xs font-medium">
-              Frete grátis {product.shipping.full && "⚡FULL"}
+              Frete grátis {product.full && "⚡FULL"}
             </p>
           )}
         </div>
